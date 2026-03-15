@@ -1,0 +1,217 @@
+.todo-container {
+    display: flex;
+    height: 600px;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.todo-sidebar {
+    width: 250px;
+    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--panel-border);
+    padding: 1.5rem 1rem;
+}
+
+.todo-lists-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.todo-list-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.todo-list-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.todo-list-btn.active {
+    background: rgba(100, 255, 218, 0.15);
+    font-weight: 600;
+}
+
+.todo-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    position: relative;
+}
+
+.todo-header {
+    margin-bottom: 2rem;
+}
+
+.todo-header h2 {
+    font-size: 2rem;
+    margin: 0 0 0.25rem 0;
+}
+
+.todo-date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.todo-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 4rem;
+    /* For the fixed add input */
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(17, 34, 64, 0.5);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.todo-item:hover {
+    background: rgba(17, 34, 64, 0.8);
+    border-color: var(--panel-border);
+}
+
+.todo-checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--text-secondary);
+    background: transparent;
+    margin-right: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.todo-checkbox:hover {
+    border-color: var(--ocean-accent);
+}
+
+.todo-checkbox.checked {
+    background: var(--ocean-accent);
+    border-color: var(--ocean-accent);
+    color: var(--ocean-dark);
+}
+
+.checkmark {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.todo-title {
+    flex: 1;
+    font-size: 1rem;
+    transition: color var(--transition-fast);
+}
+
+.completed-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.todo-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+}
+
+.todo-item:hover .todo-actions {
+    opacity: 1;
+}
+
+.todo-actions button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-star-btn {
+    color: var(--text-secondary);
+}
+
+.todo-star-btn:hover,
+.todo-star-btn.starred {
+    color: var(--coral-red);
+}
+
+.todo-delete-btn {
+    color: var(--text-secondary);
+}
+
+.todo-delete-btn:hover {
+    color: var(--coral-red);
+}
+
+/* Add Form */
+.add-todo-form {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    background: rgba(17, 34, 64, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.add-todo-btn {
+    background: transparent;
+    border: none;
+    color: var(--ocean-accent);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.add-todo-btn:disabled {
+    color: var(--text-secondary);
+    cursor: not-allowed;
+}
+
+.add-todo-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    font-family: inherit;
+}
+
+.add-todo-form input::placeholder {
+    color: var(--text-secondary);
+}

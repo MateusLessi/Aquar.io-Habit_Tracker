@@ -1,0 +1,109 @@
+.analytics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.chart-card {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.chart-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Recharts Overrides */
+.recharts-cartesian-axis-tick-value {
+    fill: var(--text-secondary);
+    font-size: 12px;
+}
+
+/* Table Card */
+.table-card {
+    padding: 1.5rem;
+    overflow-x: auto;
+    /* for mobile */
+}
+
+.marine-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.marine-table th {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.marine-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.marine-table tr:hover td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.category-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.category-badge.health {
+    background: rgba(29, 209, 161, 0.2);
+    color: #1DD1A1;
+}
+
+.category-badge.study {
+    background: rgba(255, 107, 107, 0.2);
+    color: #FF6B6B;
+}
+
+.category-badge.mindfulness {
+    background: rgba(100, 255, 218, 0.2);
+    color: #64FFDA;
+}
+
+.status-text {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-text.done {
+    color: var(--status-done);
+}
+
+.status-text.todo {
+    color: var(--status-todo);
+}
+
+.status-text.postponed {
+    color: var(--status-postponed);
+}
+
+.status-text.failed {
+    color: var(--status-failed);
+}

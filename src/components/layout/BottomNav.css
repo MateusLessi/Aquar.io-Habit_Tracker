@@ -1,0 +1,158 @@
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0; /* Attach to bottom */
+    left: 0;
+    width: 100%;
+    
+    /* Horizontal wood planks texture exactly from user's uploaded image, slightly darkened */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/wood-texture.png');
+    background-size: cover;
+    background-position: center center;
+    background-color: #8c5a3c; /* Fallback */
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+    /* Only round the top corners! */
+    border-radius: 35px 35px 0 0;
+    padding: 0 1rem;
+    height: 90px; /* Increased height */
+    z-index: 1000;
+}
+
+.nav-list {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4); /* Inactive color */
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: color 0.3s ease, filter 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Specific styling for the active state icon (moves up into the bubble) */
+.nav-item.active .nav-icon {
+    color: #ffffff !important; /* Force pure white so it stands out */
+    opacity: 1;
+    /* Exact mathematical center: nav=90, bubble top=-10, bubble half=32.5... center=22.5. Offset = 45 - 22.5 = 22.5 */
+    transform: translateY(-22.5px); 
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    z-index: 10; /* Bring above the bubble */
+}
+
+/* Make sure the SVG inside the active icon is extremely bold and bright */
+.nav-item.active .nav-icon svg {
+    stroke: #ffffff !important;
+    stroke-width: 2.5px !important;
+    opacity: 1 !important;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+/* Fluid Animated Bubble Indicator Container */
+.nav-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%; /* 1/4 of the width because we have 4 items */
+    height: 100%; 
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: none; /* Let clicks pass to the buttons */
+}
+
+/* The realistic glass bubble */
+.indicator-bubble {
+    position: absolute;
+    top: -10px; /* Lower the bubble into the nav bar significantly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65px; 
+    height: 65px; 
+    border-radius: 50%;
+    
+    /* Transparent center with slightly darker bottom and glossy top edge */
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.1) 100%);
+    
+    /* The magic of the glass sphere: complex inset shadows */
+    box-shadow: 
+        inset 0 0 20px rgba(255,255,255,0.3), /* inner white rim */
+        inset 10px 0 20px rgba(255,255,255,0.2), /* left edge glow */
+        inset -10px 0 20px rgba(255,255,255,0.2), /* right edge glow */
+        inset 0 -10px 20px rgba(0,0,0,0.4), /* bottom dark shade for depth */
+        0 10px 20px rgba(0,0,0,0.5); /* shadow cast onto the wood */
+        
+    border: 1px solid rgba(255,255,255,0.4);
+    
+    /* Distort what's behind it slightly like real glass */
+    backdrop-filter: blur(2px) brightness(1.1);
+    -webkit-backdrop-filter: blur(2px) brightness(1.1);
+    
+    z-index: 0; /* Behind the icon */
+}
+
+/* 1st Reflection: Large sharp curve at the top */
+.indicator-bubble::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 10%;
+    width: 80%;
+    height: 35%;
+    border-radius: 50% 50% 10% 10% / 100% 100% 10% 10%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+/* 2nd Reflection: Small crescent highlight at the bottom right */
+.indicator-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    right: 10%;
+    width: 40%;
+    height: 15%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+    transform: rotate(-30deg);
+    pointer-events: none;
+}
+
+/* Hide Labels */
+.nav-label {
+    display: none;
+}

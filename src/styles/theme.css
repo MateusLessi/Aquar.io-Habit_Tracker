@@ -1,0 +1,44 @@
+:root {
+  /* Ocean Palette */
+  --ocean-dark: #0A192F;
+  --ocean-medium: #112240;
+  --ocean-light: #233554;
+  --ocean-accent: #64FFDA;
+  --ocean-panel: #0F172A; /* Deep premium slate/navy */
+  
+  /* Coral Reef Palette */
+  --coral-red: #FF6B6B;
+  --coral-orange: #FF9F43;
+  --seaweed-green: #1DD1A1;
+  --sand-yellow: #FDCB6E;
+  
+  /* UI Elements */
+  --bg-color: #050E17; /* Very deep sea / almost black */
+  --text-primary: #CCD6F6;
+  --text-secondary: #8892B0;
+  --panel-bg: rgba(17, 34, 64, 0.7);
+  --panel-border: rgba(100, 255, 218, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Status Colors */
+  --status-done: var(--seaweed-green);
+  --status-postponed: var(--sand-yellow);
+  --status-failed: var(--coral-red);
+  --status-todo: var(--ocean-accent);
+
+  /* Typography */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="shallow-waters"] {
+  --bg-color: #E0F7FA;
+  --ocean-dark: #00838F;
+  --ocean-medium: #00ACC1;
+  --panel-bg: rgba(255, 255, 255, 0.6);
+  --text-primary: #004D40;
+  --text-secondary: #00695C;
+}

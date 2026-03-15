@@ -1,0 +1,109 @@
+.dashboard-widget {
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.widget-header h3 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.widget-todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.widget-todo-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+}
+
+.widget-todo-item span {
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.widget-todo-item .completed-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.widget-add-todo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--ocean-accent);
+}
+
+.widget-add-todo input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    width: 100%;
+}
+
+.widget-add-todo input::placeholder {
+    color: var(--text-secondary);
+}
+
+.analytics-widget {
+    min-height: 150px;
+}
+
+.streak-badge {
+    background: rgba(255, 159, 67, 0.2);
+    color: #FF9F43;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.widget-analytics-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.analytics-chart-mini {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.analytics-legend-mini {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.legend-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}

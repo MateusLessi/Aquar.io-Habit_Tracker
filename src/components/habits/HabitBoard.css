@@ -1,0 +1,177 @@
+.habit-board-container {
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+.habit-board {
+    display: flex;
+    flex-direction: column;
+    /* Changed to vertical */
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.habit-column-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Removed background, borders, generic shadow */
+}
+
+.habit-column-header {
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid transparent; /* Colored line */
+    margin-bottom: 0.5rem;
+}
+
+.habit-column-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.count-badge {
+    background: var(--panel-bg); /* Darker pill */
+    color: var(--text-secondary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.habit-column {
+    flex: 1;
+    min-height: 80px; 
+    transition: background-color var(--transition-fast);
+    border-radius: 12px; 
+    background: transparent;
+}
+
+.habit-column.drag-over {
+    background-color: rgba(255, 255, 255, 0.05); /* Highlight drop zone simply */
+}
+
+/* Sub-headers for Turnos */
+.turno-divider {
+    font-size: 0.75rem;
+    color: var(--ocean-accent);
+    margin: 1.5rem 0 0.5rem 0.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.turno-divider:first-child {
+    margin-top: 0.5rem;
+}
+
+/* Habit Card */
+.habit-card-wrapper {
+    margin-bottom: 1rem;
+}
+
+.habit-card {
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    cursor: grab;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle inner light for the glass effect */
+.habit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+
+.habit-card.is-dragging {
+    opacity: 0.9;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    transform: rotate(2deg);
+}
+
+.habit-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+}
+
+.habit-card-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.5px;
+}
+
+.habit-streak {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--coral-orange);
+    background: transparent;
+    padding: 0;
+}
+
+.habit-card-body {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.habit-category {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+/* Glowing Circular Add/Play Button styles */
+.glowing-circle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(100, 255, 218, 0.6);
+    background: radial-gradient(circle at 30% 30%, rgba(100, 255, 218, 0.2), transparent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.4), inset 0 0 10px rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.glowing-circle-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.8), inset 0 0 15px rgba(100, 255, 218, 0.5);
+}
+
+/* Inline progress layout for the reference design */
+.progress-inline-container {
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    gap: 10px;
+    margin-bottom: 15px;
+}
