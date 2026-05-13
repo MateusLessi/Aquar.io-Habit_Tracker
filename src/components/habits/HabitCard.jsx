@@ -161,28 +161,58 @@ const HabitCard = ({ habit, index }) => {
                                 </div>
 
                                 {/* Right Side: Massive Glowing Action Button */}
-                                {habit.status !== 'done' && habit.frequencyType === 'counter' && (
+                                {habit.frequencyType === 'simple' && (
                                     <button 
-                                        className="glowing-circle-btn" 
-                                        onClick={handleIncrementCounter}
+                                        className={`glowing-circle-btn ${habit.status === 'done' ? 'done-btn' : ''}`}
+                                        onClick={() => updateHabitStatus(habit.id, habit.status === 'done' ? 'todo' : 'done')}
                                         onPointerDown={(e) => e.stopPropagation()}
+                                        style={{
+                                            borderColor: habit.status === 'done' ? 'rgba(29, 209, 161, 0.6)' : 'rgba(100, 255, 218, 0.6)',
+                                            background: habit.status === 'done' ? 'radial-gradient(circle at 30% 30%, rgba(29, 209, 161, 0.2), transparent)' : '',
+                                            boxShadow: habit.status === 'done' ? '0 0 20px rgba(29, 209, 161, 0.4), inset 0 0 10px rgba(29, 209, 161, 0.2)' : ''
+                                        }}
                                     >
-                                        <Plus size={32} strokeWidth={2.5} />
+                                        {habit.status === 'done' ? <Check size={28} color="#1DD1A1" /> : <div style={{ width: 20, height: 20, border: '2px solid rgba(255,255,255,0.7)', borderRadius: '5px' }} />}
                                     </button>
                                 )}
 
-                                {habit.status !== 'done' && habit.frequencyType === 'timer' && (
+                                {habit.frequencyType === 'counter' && (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <button 
+                                            className="mini-circle-btn"
+                                            onClick={() => updateHabitProgress(habit.id, habit.currentProgress - 1)}
+                                            disabled={habit.currentProgress <= 0}
+                                            onPointerDown={(e) => e.stopPropagation()}
+                                        >
+                                            -
+                                        </button>
+                                        <button 
+                                            className={`glowing-circle-btn ${habit.status === 'done' ? 'done-btn' : ''}`}
+                                            onClick={handleIncrementCounter}
+                                            onPointerDown={(e) => e.stopPropagation()}
+                                            style={{
+                                                borderColor: habit.status === 'done' ? 'rgba(29, 209, 161, 0.6)' : 'rgba(100, 255, 218, 0.6)',
+                                                background: habit.status === 'done' ? 'radial-gradient(circle at 30% 30%, rgba(29, 209, 161, 0.2), transparent)' : '',
+                                                boxShadow: habit.status === 'done' ? '0 0 20px rgba(29, 209, 161, 0.4), inset 0 0 10px rgba(29, 209, 161, 0.2)' : ''
+                                            }}
+                                        >
+                                            {habit.status === 'done' ? <Check size={28} color="#1DD1A1" /> : <Plus size={32} strokeWidth={2.5} />}
+                                        </button>
+                                    </div>
+                                )}
+
+                                {habit.frequencyType === 'timer' && (
                                     <button 
-                                        className="glowing-circle-btn" 
+                                        className={`glowing-circle-btn ${habit.status === 'done' ? 'done-btn' : ''}`}
                                         onClick={toggleTimer}
                                         onPointerDown={(e) => e.stopPropagation()}
                                         style={{ 
-                                            borderColor: isPlaying ? 'rgba(255, 107, 107, 0.6)' : 'rgba(100, 255, 218, 0.6)',
-                                            background: isPlaying ? 'radial-gradient(circle at 30% 30%, rgba(255, 107, 107, 0.2), transparent)' : '',
-                                            boxShadow: isPlaying ? '0 0 20px rgba(255, 107, 107, 0.4), inset 0 0 10px rgba(255, 107, 107, 0.2)' : ''
+                                            borderColor: habit.status === 'done' ? 'rgba(29, 209, 161, 0.6)' : (isPlaying ? 'rgba(255, 107, 107, 0.6)' : 'rgba(100, 255, 218, 0.6)'),
+                                            background: habit.status === 'done' ? 'radial-gradient(circle at 30% 30%, rgba(29, 209, 161, 0.2), transparent)' : (isPlaying ? 'radial-gradient(circle at 30% 30%, rgba(255, 107, 107, 0.2), transparent)' : ''),
+                                            boxShadow: habit.status === 'done' ? '0 0 20px rgba(29, 209, 161, 0.4), inset 0 0 10px rgba(29, 209, 161, 0.2)' : (isPlaying ? '0 0 20px rgba(255, 107, 107, 0.4), inset 0 0 10px rgba(255, 107, 107, 0.2)' : '')
                                         }}
                                     >
-                                        {isPlaying ? <Pause size={28} color="#FF6B6B" /> : <Play size={28} />}
+                                        {habit.status === 'done' ? <Check size={28} color="#1DD1A1" /> : (isPlaying ? <Pause size={28} color="#FF6B6B" /> : <Play size={28} />)}
                                     </button>
                                 )}
                             </div>

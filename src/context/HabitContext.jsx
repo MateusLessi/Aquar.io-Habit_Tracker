@@ -15,11 +15,17 @@ export const HabitProvider = ({ children }) => {
         setHabits(prevHabits =>
             prevHabits.map(habit => {
                 if (habit.id === habitId) {
-                    // Simplistic streak logic for now: increment if done, reset if failed.
                     let newStreak = habit.streak;
+                    // Se estiver completando
                     if (newStatus === 'done' && habit.status !== 'done') {
                         newStreak += 1;
-                    } else if (newStatus === 'failed') {
+                    } 
+                    // Se estiver desfazendo um que estava completo
+                    else if (newStatus === 'todo' && habit.status === 'done') {
+                        newStreak = Math.max(0, newStreak - 1);
+                    } 
+                    // Se falhar
+                    else if (newStatus === 'failed') {
                         newStreak = 0;
                     }
                     return { ...habit, status: newStatus, streak: newStreak };
@@ -36,16 +42,25 @@ export const HabitProvider = ({ children }) => {
                     let newStatus = habit.status;
                     let newStreak = habit.streak;
                     
-                    // Auto-complete if goal reached
-                    if (habit.frequencyType === 'counter' && newProgress >= habit.counterGoal && habit.status !== 'done') {
-                        newStatus = 'done';
-                        newStreak += 1;
-                    } else if (habit.frequencyType === 'timer' && newProgress >= habit.timerDuration && habit.status !== 'done') {
-                        newStatus = 'done';
-                        newStreak += 1;
+                    if (habit.frequencyType === 'counter') {
+                        if (newProgress >= habit.counterGoal && habit.status !== 'done') {
+                            newStatus = 'done';
+                            newStreak += 1;
+                        } else if (newProgress < habit.counterGoal && habit.status === 'done') {
+                            newStatus = 'todo';
+                            newStreak = Math.max(0, newStreak - 1);
+                        }
+                    } else if (habit.frequencyType === 'timer') {
+                        if (newProgress >= habit.timerDuration && habit.status !== 'done') {
+                            newStatus = 'done';
+                            newStreak += 1;
+                        } else if (newProgress < habit.timerDuration && habit.status === 'done') {
+                            newStatus = 'todo';
+                            newStreak = Math.max(0, newStreak - 1);
+                        }
                     }
 
-                    return { ...habit, currentProgress: newProgress, status: newStatus, streak: newStreak };
+                    return { ...habit, currentProgress: Math.max(0, newProgress), status: newStatus, streak: newStreak };
                 }
                 return habit;
             })
@@ -54,6 +69,7 @@ export const HabitProvider = ({ children }) => {
 
     const addHabit = (newHabit) => {
         setHabits([...habits, { 
+            frequencyType: 'simple', // default
             ...newHabit, 
             id: Date.now().toString(), 
             status: 'todo', 

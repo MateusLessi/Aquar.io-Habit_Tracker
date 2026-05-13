@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useHabits } from '../../context/HabitContext';
-import { X } from 'lucide-react';
+import { X, CheckSquare, Hash, Clock } from 'lucide-react';
 import { CREATURE_TYPES } from '../../constants/aquario';
 import './AddHabitModal.css';
 
 const AddHabitModal = ({ isOpen, onClose }) => {
     const { addHabit } = useHabits();
     const [name, setName] = useState('');
-    const [category, setCategory] = useState('Health'); // Default aligns with key in CREATURE_TYPES
+    const [category, setCategory] = useState('Health');
+    const [frequencyType, setFrequencyType] = useState('simple'); // 'simple', 'counter', 'timer'
+    const [counterGoal, setCounterGoal] = useState(3);
+    const [timerDuration, setTimerDuration] = useState(15); // in minutes
 
     const selectedCreature = CREATURE_TYPES[category] || CREATURE_TYPES['Health'];
 
@@ -17,14 +20,26 @@ const AddHabitModal = ({ isOpen, onClose }) => {
         e.preventDefault();
         if (!name.trim()) return;
 
-        addHabit({
+        const newHabit = {
             name: name.trim(),
             category,
             creatureType: selectedCreature.id,
-        });
+            frequencyType,
+        };
+
+        if (frequencyType === 'counter') {
+            newHabit.counterGoal = Number(counterGoal);
+        } else if (frequencyType === 'timer') {
+            newHabit.timerDuration = Number(timerDuration) * 60; // save as seconds
+        }
+
+        addHabit(newHabit);
 
         setName('');
         setCategory('Health');
+        setFrequencyType('simple');
+        setCounterGoal(3);
+        setTimerDuration(15);
         onClose();
     };
 
@@ -48,6 +63,61 @@ const AddHabitModal = ({ isOpen, onClose }) => {
                             required
                         />
                     </div>
+
+                    <div className="form-group">
+                        <label>Habit Type</label>
+                        <div className="type-selector">
+                            <button 
+                                type="button" 
+                                className={`type-btn ${frequencyType === 'simple' ? 'active' : ''}`}
+                                onClick={() => setFrequencyType('simple')}
+                            >
+                                <CheckSquare size={18} /> Simple
+                            </button>
+                            <button 
+                                type="button" 
+                                className={`type-btn ${frequencyType === 'counter' ? 'active' : ''}`}
+                                onClick={() => setFrequencyType('counter')}
+                            >
+                                <Hash size={18} /> Counter
+                            </button>
+                            <button 
+                                type="button" 
+                                className={`type-btn ${frequencyType === 'timer' ? 'active' : ''}`}
+                                onClick={() => setFrequencyType('timer')}
+                            >
+                                <Clock size={18} /> Timer
+                            </button>
+                        </div>
+                    </div>
+
+                    {frequencyType === 'counter' && (
+                        <div className="form-group">
+                            <label htmlFor="counterGoal">Daily Goal (times)</label>
+                            <input
+                                type="number"
+                                id="counterGoal"
+                                value={counterGoal}
+                                onChange={(e) => setCounterGoal(e.target.value)}
+                                min="1"
+                                required
+                            />
+                        </div>
+                    )}
+
+                    {frequencyType === 'timer' && (
+                        <div className="form-group">
+                            <label htmlFor="timerDuration">Duration (minutes)</label>
+                            <input
+                                type="number"
+                                id="timerDuration"
+                                value={timerDuration}
+                                onChange={(e) => setTimerDuration(e.target.value)}
+                                min="1"
+                                required
+                            />
+                        </div>
+                    )}
 
                     <div className="form-group">
                         <label htmlFor="habitCat">Category / Creature</label>
